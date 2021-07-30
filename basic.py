@@ -26,3 +26,12 @@ if c % 2 == 0:
 else:
     print("odd")
 
+# 정수 3개 입력받아 합과 평균을 출력
+
+a, b, c = input().split()
+a = int(a)
+b = int(b)
+c = int(c)
+hap = a + b + c
+avg = hap / 3
+print(hap, format(avg, ".2f"))
