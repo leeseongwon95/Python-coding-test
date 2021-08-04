@@ -35,3 +35,11 @@ c = int(c)
 hap = a + b + c
 avg = hap / 3
 print(hap, format(avg, ".2f"))
+
+# 2의 거듭제곱 배로 곱해 출력하기
+
+a, b = input().split()
+a = int(a)
+b = int(b)
+print(a<<b)
+
