@@ -97,3 +97,36 @@ print( not (c or d))
 
 a = int(input())
 print(~a)
+
+# 비트단위로 AND 하여 출력하기
+
+a, b = input().split()
+print(int(a) & int(b))
+
+# 비트단위로 OR하여 출력하기
+
+a, b = input().split()
+print(int(a) | int(b))
+
+# 비트단위로 XOR 하여 출력하기
+
+a, b = input().split()
+print(int(a) ^ int(b))
+
+# 정수 1개 입력받아 분류하기
+
+n = int(input())
+
+if n < 0:
+    if n % 2 == 0:
+        print('A')
+    else:
+        print('B')
+else:
+    if n % 2 == 0:
+        print('C')
+    else:
+        print('D')
+
+
+
