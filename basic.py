@@ -71,6 +71,29 @@ print(not a)
 a, b = input().split()
 print(bool(int(a)) and bool(int(b)))
 
+# 참/거짓이 서로 다를 때에만 참 출력하기
 
+a, b = input().split()
+c = bool(int(a))
+d = bool(int(b))
+print((c and (not d)) or ((not c) and d))
 
+# 참/거짓이 서로 같은 때에만 참 출력하기
 
+a, b = input().split()
+a = bool(int(a))
+b = bool(int(b))
+print(a == b)
+
+# 둘 다 거짓일 경우만 참 출력하기
+
+a, b = input().split()
+c = bool(int(a))
+d = bool(int(b))
+
+print( not (c or d))
+
+# 비트단위로 NOT 하여 출력하기
+
+a = int(input())
+print(~a)
