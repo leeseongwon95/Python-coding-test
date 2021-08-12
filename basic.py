@@ -128,5 +128,102 @@ else:
     else:
         print('D')
 
+# 정수 2개 입력받아 큰 값 출력하기
+
+a, b = input().split()
+a = int(a)
+b = int(b)
+c = a if a >= b else b
+print(c)
+
+# 정수 3개 입력받아 가장 작은 값 출력하기
+
+a, b, c = input().split()
+a = int(a)
+b = int(b)
+c = int(c)
+
+d = a if a < b else b
+e = d if d < c else c
+
+# 정수 3개 입력받아 짝수만 출력하기
+
+a, b, c = input().split()
+a = int(a)
+b = int(b)
+c = int(c)
+
+if a%2 == 0:
+    print(a)
+
+if b%2 == 0:
+    print(b)
+
+if c%2 == 0:
+    print(c)
+
+# 정수 3개 입력받아 짝/홀 출력하기
+
+a, b, c = input().split()
+a = int(a)
+b = int(b)
+c = int(c)
+
+if a%2 == 0:
+    print("even")
+else:
+    print("odd")
+
+if b%2 == 0:
+    print("even")
+else:
+    print("odd")
+
+if c%2 == 0:
+    print("even")
+else:
+    print("odd")
+
+# 점수 입력받아 평가 출력하기
+
+a = int(input())
+
+if a >= 90:
+    print("A")
+elif a >= 70:
+    print("B")
+elif a >= 40:
+    print("C")
+else:
+    print("D")
+
+# 평가 입력받아 다르게 출력하기
+
+a = input()
+
+if a=='A':
+    print("best!!!")
+elif a == 'B':
+    print("good!!")
+elif a == 'C':
+    print("run!")
+elif a == 'D':
+    print("slowly~")
+else:
+    print("what?")
+
+# 월이 입력될 때 계절 이름이 출력되도록 해보자.
+
+a = int(input())
+
+if a//3 == 1:
+    print("spring")
+elif a//3 == 2:
+    print("summer")
+elif a//3 == 3:
+    print("fall")
+else:
+    print("winter")
+
 
 
