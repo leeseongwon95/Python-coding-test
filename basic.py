@@ -225,5 +225,42 @@ elif a//3 == 3:
 else:
     print("winter")
 
+# 0이 입력될 때까지 무한 출력하기
 
+while True:
+    a = input()
+    a = int(a)
+    if a == 0:
+        break
+    else:
+        print(a)
+
+# 정수 1개 입력받아 카운트다운 출력하기 1
+
+a = int(input())
+
+while a != 0:
+    print(a)
+    a = a - 1
+
+# 정수 1개 입력받아 카운트다운 출력하기 2
+
+a = int(input())
+
+while a != 0:
+    a = a - 1
+    print(a)
+
+# 문자 1개 입력받아 알파벳 출력하기
+
+a = input()
+start = ord('a')
+
+while True:
+    print(chr(start), end = ' ')
+
+    if (chr(start) == a):
+        break
+
+    start = start + 1
 
