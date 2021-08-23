@@ -264,3 +264,38 @@ while True:
 
     start = start + 1
 
+# 정수 1개 입력받아 그 수까지 출력하기
+
+a = int(input())
+
+i = 0
+while i <= a:
+    print(i)
+    i += 1
+
+# 정수 1개 입력받아 그 수까지 출력하기
+
+a = int(input())
+
+for i in range(a+1):
+    print(i)
+
+# 짝수 합 구하기
+
+n = int(input())
+
+sum = 0
+for i in range(1, n+1):
+    if i % 2 == 0:
+        sum = sum + 1
+
+print(sum)
+
+# 원하는 문자가 입력될 때까지 반복 출력하기
+
+while True:
+    x = input()
+    print(x)
+    if x == 'q':
+        break
+    
