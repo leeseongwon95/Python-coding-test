@@ -299,3 +299,42 @@ while True:
     if x == 'q':
         break
     
+# 언제까지 더해야 할까?
+
+n = int(input())
+
+s = 0
+t = 0
+while s < n:
+    t = t + 1
+    s = s + 1
+
+print(t)
+
+# 주사위 2개 던지기
+
+n, m = input().split()
+
+n = int(n)
+m = int(m)
+
+for i in range(1, n + 1):
+    for j in range(1, m + 1):
+        print(i, j)
+
+# 16 진수 구구단 출력하기
+
+n = int(input(), 16)
+
+for i in range(1, 16):
+    print('%X'%n, '+%X'%i, '=%X'%(n*i), sep='')
+
+# 3 6 9 게임의 왕이 되자
+
+n = int(input())
+
+for i in range(1, n+1):
+    if i%10 == 3 or i%10 == 6 or i%10 == 9:
+        print("X", end=' ')
+    else:
+        print(i, end = ' ')
