@@ -64,23 +64,5 @@ print(average)
 # 위 코드를 리스트 내포(list comprehension)를 사용하여 표현해 보자.
 
 numbers = [1, 2, 3, 4, 5]
-
-for i in numbers:
-    if numbers == 2:
-        numbers.count(2)        
-    
-print(i)
-# re = [n*2 for n in numbers if n%2==1]
-# print(re) 
-
-f = ['apple', 'banana', 'orange', ['apple', 'orange']]
-L = []
-for i in f:
-    for j in i:
-        print(j)
-    
-
-
-# for i in f:
-#     print(i)
-        
+re = [n*2 for n in numbers if n%2 == 1]
+print(re)
