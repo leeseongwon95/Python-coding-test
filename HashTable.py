@@ -135,3 +135,36 @@ print(ht.read(2))
 ht.insert(4, 'd')
 ht.print()
 
+# ('name' : 'Lee') 쌍이 삭제를 안했는데도 (2 : 'b') 가 들어가자 없어짐 
+# hash 의 계산 값이 겹쳐져서 이러는데 이걸 충돌이 라고 함
+
+# 리스트로 만든 개선된 해쉬테이블 (충돌 해결 알고리즘)
+# 충돌을 해결하려면 크게 3가지의 개선 기법 존재
+
+# 1. Chaining 기법
+# Open Hashing 기법 중 하나 : 해쉬테이블 저장공간 외에 공간을 더 추가해서 사용하는 방법
+# 충돌이 발생시, 링크드 리스트로 데이터를 추가로 뒤에 연결시키는 방법임
+# key , value 쌍이 리스트로 들어가고 제한된 hash value index도 각각 리스트가 되도록 만들어봄
+
+class HashTable:
+    def __init__(self):
+        self.hash_table = list([0 for i in range(8)])
+    
+    def hash_function(self, key):
+        # Custom Hash Function
+        return key % 8
+    
+    def insert(self, key, value):
+        gen_key = hash(key)
+        hash_value = self.hash_function(gen_key)
+
+        if self.hash_table[hash_value] != 0:
+            # 해당 hash value index를 이미 사용하고 있는경우 (충돌 시)
+            for i in range(len(self.hash_table[hash_value])):
+                # 이미 같은 키 값이 존재하는 경우 -> value 교체
+                # 이때 0은 key, 1은 value 값이 존재하는 인덱스
+                if self.hash_table[hash_value][i][0] == gen_key:
+                    self.hash_table[hash_value][i][1] = value
+                    return
+            # 같은 키 값이 존재하지 않는 경우 [key, value] 를 해당 인덱스에 삽입
+            self.hash
