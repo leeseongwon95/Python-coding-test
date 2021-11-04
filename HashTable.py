@@ -98,7 +98,7 @@ a = {1 : 'a', 1 : 'b'}
 # 리스트로 해쉬 테이블 만들기
 # 우선 먼저 간단히 해쉬테이블을 만들면
 
-class HashTable: 
+class HashTable1: 
     def __init__(self):
         self.hash_table = list([0 for i in range(8)])
 
@@ -122,7 +122,7 @@ class HashTable:
 # insert함수를 통해 key, value 쌍을 넣을 수 있고 
 # read를 통해 key 값을 이용하여 value 값 얻을 수 있음 (이때 기본 라이브러리 hash 함수는 랜덤 연산작용으로 실행마다 값이 달라짐)
 
-ht = HashTable()
+ht = HashTable1()
 ht.insert(1, 'a')
 ht.print()
 ht.insert('name', 'Lee')
@@ -146,7 +146,7 @@ ht.print()
 # 충돌이 발생시, 링크드 리스트로 데이터를 추가로 뒤에 연결시키는 방법임
 # key , value 쌍이 리스트로 들어가고 제한된 hash value index도 각각 리스트가 되도록 만들어봄
 
-class HashTable:
+class HashTable2:
     def __init__(self):
         self.hash_table = list([0 for i in range(8)])
     
@@ -167,4 +167,133 @@ class HashTable:
                     self.hash_table[hash_value][i][1] = value
                     return
             # 같은 키 값이 존재하지 않는 경우 [key, value] 를 해당 인덱스에 삽입
-            self.hash
+            self.hash_table[hash_value].append([gen_key, value])
+        else:
+            # 해당 hash_value 를 사용하고 있지 않는 경우
+            self.hash_table[hash_value] = [[gen_key, value]]
+        
+    def read(self, key):
+        gen_key = hash(key)
+        hash_value = self.hash_function(gen_key)
+
+        if self.hash_table[hash_value] != 0:
+            # 해당 해쉬 값 index에 데이터가 존재 할때
+            for i in range(len(self.hash_table[hash_value])):
+                if self.hash_table[hash_value][i][0] == gen_key:
+                    # 키와 동일할 경우 -> 해당 value return
+                    return self.hash_table[hash_value][i][1]
+            # 동일한 키가 존재하지 않으면 None return
+            return None
+        else:
+            # 해당 해쉬 값 index에 데이터가 없을 때
+            return None
+    
+    def print(self):
+        print(self.hash_table)
+
+# 해쉬 값이 같은 자리에는 리스트를 만들어서 추가하는 방식으로 구현, 리스트에는 key 값과 value 를 넣어서 구현
+
+ht = HashTable2()
+ht.insert(1, 'a')
+ht.print()
+ht.insert('name', 'Lee')
+ht.print()
+ht.insert(2, 'b')
+ht.print()
+ht.insert(3, 'c')
+ht.print()
+print(ht.read(2))
+ht.insert(4, 'd')
+ht.print()
+# [key, value] 가 리스트에 들어가며, 기존의 인덱스가 이미 사용중이라면 해당 인덱스의 리스트에 추가하는 방식
+# 이 방식은 끝없이 key, value 쌍들을 넣을 수 있지만 공간 효율성이 떨어짐, 하나의 hash value index 에만 들어가면 불균형한 구조가 될 가능성 농후
+
+
+# 2. Linear Probing 기법
+# Close Hashing 기법 중 하나 : 해쉬테이블 저장공간 안에서 충돌 문제를 해결하는 방법
+# 충돌이 일어나면, 해당 hash value (hash address) 의 다음 index 부터 맨 청므 나오는 빈공간에 저장하는 기법 (저장 공간 활용도 증가)
+
+class HashTable3:
+    def __init__(self):
+        self.hash_table = list([0 for i in range(8)])
+
+    def hash_function(self, key):
+        # Custom Hash Function
+        return key % 8
+
+    def insert(self, key, value):
+        gen_key = hash(key)
+        hash_value = self.hash_function(gen_key)
+
+        if self.hash_table[hash_value] != 0:
+            # 해당 hash value index 를 이미 사용하고 있는 경우 (충돌 시)
+            for i in range(hash_value, len(self.hash_table)):
+                # 해당 hash value index 부터 마지막 index 까지
+                # 돌면서 비어있거나 key 가 같은 값을 찾는다.
+                if self.hash_table[i] == 0:
+                    # 해당 인덱스가 비어있을 때,
+                    self.hash_table[i] = [gen_key, value]
+                    return
+                elif self.hash_table[i][0] == gen_key:
+                    # 이미 같은 키 값이 존재하는 경우 덮어쓰기
+                    self.hash_table[i][1] = value
+                    return
+
+        else:
+            # 해당 hash_value 를 사용하고 있지 않는 경우
+            self.hash_table[hash_value] = [gen_key, value]
+
+    def read(self, key):
+        gen_key = hash(key)
+        hash_value = self.hash_function(gen_key)
+
+        if self.hash_table[hash_value] != 0:
+            # 해당 해쉬 값 index 에 데이터가 존재 할 때
+            for i in range(hash_value, len(self.hash_table)):
+                if self.hash_table[i] == 0:
+                    # 비어있는 경우,
+                    return None
+                elif self.hash_table[i][0] == gen_key:
+                    # 키와 동일할 경우 -> 해당 value return
+                    return self.hash_table[i][1]
+        else:
+            # 해당 해쉬 값 index에 데이터가 없을 때,
+            return None
+
+    
+    def print(self):
+        print(self.hash_table)
+
+# 이 코드는 hash value index 에 자리가 없을 때, 그 이후의 리스트를 돌면서 빈공간을 찾아서 key, value 쌍을 넣는 방법임
+
+ht = HashTable3()
+ht.insert(1, 'a')
+ht.print()
+ht.insert('name', 'Lee')
+ht.print()
+ht.insert(2, 'b')
+ht.print()
+ht.insert(3, 'c')
+ht.print()
+print(ht.read(2))
+ht.insert(4, 'd')
+ht.print()
+
+# 빈공간을 찾아서 key, value 값들이 충돌하지 않고 들어가는 모습을 확인 할 수 있음 
+# 근데 이 알고리즘은 미리 지정한 자릿 수를 넘어가면 충돌이 일어나게 된다는 단점이 있음
+# 8개 이상의 쌍을 넣으면 key 값이 7인 키 쌍에서 충돌이 일어남
+
+
+# 3. 공간을 확장하는 방법
+# Linear Probing 방식에서 공간을 늘린다면 1번에 비해 균형적인 구조로 사용가능
+
+class HasTable4:
+    def __init__(self, n):
+        self.n = n
+        self.hash_tabel = list([0 for i in range(n)])
+
+    def hash_function(self, key):
+        # Custom Hash Function
+        return key % self.n
+
+# n을 생성자의 매개변수로 사용해서 받고, 해당 n을 큰 수로 늘리면 많은 공간 사용할 수 있겠음.
